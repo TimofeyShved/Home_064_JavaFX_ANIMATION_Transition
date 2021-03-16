@@ -4,8 +4,10 @@ import com.sun.javafx.geom.PathIterator;
 import com.sun.javafx.geom.RectBounds;
 import com.sun.javafx.geom.Shape;
 import com.sun.javafx.geom.transform.BaseTransform;
+import javafx.animation.FillTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
+import javafx.animation.StrokeTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -37,11 +39,17 @@ public class Main extends Application {
 
         // создание квадратов
         Rectangle rectangle = new Rectangle(100,100, Color.RED);
+
         Rectangle rectangle2 = new Rectangle(100, 100, Color.GREEN);
         rectangle2.setRotate(50.0); // повернуть боком (ромб)
         rectangle2.setX(100);
         rectangle2.setY(100);
+
         Rectangle rectangle3 = new Rectangle(100, 100, Color.YELLOW);
+        rectangle3.setX(100);
+        rectangle3.setY(100);
+        rectangle3.setStroke(Color.BLACK);
+        rectangle3.setStrokeWidth(3);
 
         //-------------------------------------------- RotateTransition -----------
         // действия на нжатия мышки
@@ -69,6 +77,39 @@ public class Main extends Application {
             st.setToX(1); // до каких размеров изменять х1
             st.setToY(1);
             st.play(); // отыгать анимацию
+        });
+
+        //-------------------------------------------- StrokeTransition and FillTransition -----------
+        // действия при наведении мышки
+        rectangle3.setOnMouseEntered(event -> {
+
+            // анимация изменения границы объекта, время / на каком объекте
+            StrokeTransition st = new StrokeTransition(Duration.seconds(1), rectangle3);
+            st.setFromValue(Color.BLUE);
+            st.setToValue(Color.RED);
+            st.play(); // отыгать анимацию
+
+            // анимация изменения цвета объекта, время / на каком объекте
+            FillTransition ft = new FillTransition(Duration.seconds(1), rectangle3);
+            ft.setFromValue(Color.YELLOW);
+            ft.setToValue(Color.BLUE);
+            ft.play(); // отыгать анимацию
+        });
+
+        // действия при отведении мышки
+        rectangle3.setOnMouseExited(event -> {
+
+            // анимация изменения границы объекта, время / на каком объекте
+            StrokeTransition st = new StrokeTransition(Duration.seconds(1), rectangle3);
+            st.setFromValue(Color.RED);
+            st.setToValue(Color.BLUE);
+            st.play(); // отыгать анимацию
+
+            // анимация изменения цвета объекта, время / на каком объекте
+            FillTransition ft = new FillTransition(Duration.seconds(1), rectangle3);
+            ft.setFromValue(Color.BLUE);
+            ft.setToValue(Color.YELLOW);
+            ft.play(); // отыгать анимацию
         });
 
 
