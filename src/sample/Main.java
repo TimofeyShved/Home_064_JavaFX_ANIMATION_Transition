@@ -57,6 +57,9 @@ public class Main extends Application {
             RotateTransition rt = new RotateTransition(Duration.seconds(2), rectangle);
             rt.setByAngle(180); // на сколько градусов повернуть
             rt.setCycleCount(3); // сколько раз повторить анимацию?
+            rt.setOnFinished(event1 -> { // если анимация закончилась
+                System.out.println("Finish animation");
+            });
             rt.play(); // отыгать анимацию
         });
 
@@ -66,9 +69,12 @@ public class Main extends Application {
             ScaleTransition st = new ScaleTransition(Duration.seconds(1), rectangle2);
             st.setToX(2); // до каких размеров изменять х2
             st.setToY(2);
+            st.setOnFinished(event1 -> { // если анимация закончилась
+                System.out.println("Finish animation");
+            });
             st.play(); // отыгать анимацию
         });
-
+*
         // действия при отведении мышки
         rectangle2.setOnMouseExited(event -> { // анимация увеличения объекта, время / на каком объекте
             ScaleTransition st = new ScaleTransition(Duration.seconds(1), rectangle2);
@@ -76,6 +82,9 @@ public class Main extends Application {
             st.setFromY(2.5);
             st.setToX(1); // до каких размеров изменять х1
             st.setToY(1);
+            st.setOnFinished(event1 -> { // если анимация закончилась
+                System.out.println("Finish animation");
+            });
             st.play(); // отыгать анимацию
         });
 
